@@ -1,6 +1,5 @@
 from django.urls import path
 from .views import ForumListCreateView, ForumDetailView,MessageListCreateView,MessageDetailView,UserCreateView,UserLoginView,UserLogoutView,FreeAccessView,ForumWithMessagesView,SubscribeToForum,UserInfoView,AddLike
-from .consumers import ChatConsumer
 
 urlpatterns = [
     path('free-access/', FreeAccessView.as_view(), name='free-access'),
