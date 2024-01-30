@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'api',
     'rest_framework',
     'rest_framework.authtoken',
@@ -90,6 +91,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Forum.wsgi.application'
+ASGI_APPLICATION = "Forum.routing.application"
 
 AUTH_USER_MODEL = 'api.CustomUser'
 
@@ -98,10 +100,20 @@ AUTH_USER_MODEL = 'api.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'xztphutd',
+        'USER': 'xztphutd',
+        'PASSWORD': 'Td6fHkhWHXeI2FH1udpsT7Vau3J3Q4bq',
+        'HOST': 'kandula.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
 
@@ -138,6 +150,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
