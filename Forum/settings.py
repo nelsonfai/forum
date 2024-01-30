@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'channels',
     'api',
     'rest_framework',
     'rest_framework.authtoken',
@@ -91,7 +90,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Forum.wsgi.application'
-ASGI_APPLICATION = "Forum.routing.application"
 
 AUTH_USER_MODEL = 'api.CustomUser'
 
@@ -140,11 +138,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
-}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
