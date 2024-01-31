@@ -15,6 +15,7 @@ from django.shortcuts import get_object_or_404
 User = get_user_model()
 class UserInfoView(APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         user = request.user
         serializer = CustomUserAdminInfoSerializer(user)
@@ -24,6 +25,23 @@ class UserInfoView(APIView):
         }
         return Response(data, status=status.HTTP_200_OK)
 
+    def put(self, request, *args, **kwargs):
+        user = request.user
+        serializer = CustomUserAdminInfoSerializer(user, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            # Retrieve the updated user data after saving
+            updated_user = CustomUser.objects.get(pk=user.pk)
+            updated_serializer = CustomUserAdminInfoSerializer(updated_user)
+            data = {
+                "user": updated_serializer.data,
+                "notification": updated_user.mynotification.count()
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 class UserCreateView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
@@ -39,7 +57,6 @@ class UserLoginView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         user = User.objects.filter(email=email).first()
-        print(user)
         if user and user.check_password(password):
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key, 'user_id': user.id})

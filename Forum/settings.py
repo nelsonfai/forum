@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'taggit',
     'corsheaders',
-
 ]
 
 
@@ -172,6 +171,7 @@ CORS_ORIGIN_WHITELIST = (
   'http://localhost:8000',
   'http://localhost:3000',
   'http://localhost:3001',
-  'https://s6fxgt-3000.csb.app'
+  'https://s6fxgt-3000.csb.app',
+  "https://s6fxgt-3001.csb.app"
 )
 

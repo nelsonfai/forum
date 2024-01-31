@@ -17,6 +17,7 @@ urlpatterns = [
     path('messages/', MessageListCreateView.as_view(), name='message-list-create'), #used create only
     path('messages/<int:pk>/', MessageDetailView.as_view(), name='message-detail'),
     path('messages/<int:pk>/like/', AddLike.as_view(), name='message-detail'),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
