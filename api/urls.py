@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import ForumListCreateView, ForumDetailView,MessageListCreateView,MessageDetailView,UserCreateView,UserLoginView,UserLogoutView,FreeAccessView,ForumWithMessagesView,SubscribeToForum,UserInfoView,AddLike
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('free-access/', FreeAccessView.as_view(), name='free-access'),
@@ -16,6 +18,8 @@ urlpatterns = [
     path('messages/<int:pk>/', MessageDetailView.as_view(), name='message-detail'),
     path('messages/<int:pk>/like/', AddLike.as_view(), name='message-detail'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 
