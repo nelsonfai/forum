@@ -19,8 +19,5 @@ urlpatterns = [
     path('messages/<int:pk>/like/', AddLike.as_view(), name='message-detail'),
 
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
 
 

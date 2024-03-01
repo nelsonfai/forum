@@ -81,7 +81,7 @@ class ForumListCreateView(generics.ListCreateAPIView):
         if filtermood == 'Subscribed':
             forum = Forum.objects.filter(subscribed_members=user).order_by('created_date')
             return forum
-        elif filtermood == "My forums":
+        elif filtermood == "Myforums":
             forum = Forum.objects.filter(admin=user).order_by('created_date')
         else:
             return Forum.objects.all()

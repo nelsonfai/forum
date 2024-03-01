@@ -10,7 +10,7 @@ from rest_framework.exceptions import ValidationError
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'profile_picture', 'is_private','password']
+        fields = ['id', 'username', 'email', 'profile_picture', 'is_private','password','imageurl']
         extra_kwargs = {
             'password': {'write_only': True},
         }
@@ -24,11 +24,15 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return user
 
 class CustomUserAdminInfoSerializer(serializers.ModelSerializer):
+    imageurl = serializers.SerializerMethodField()
     class Meta:
         model = CustomUser
-        fields = ['id','profile_picture', 'username','is_private','email']
+        fields = ['id','profile_picture', 'username','is_private','email','imageurl']
 
-
+    def get_imageurl (self,obj):
+        if obj.profile_picture:
+            print('image url -------',obj.profile_picture.url)
+            return obj.profile_picture.url
 class MessageSerializer(serializers.ModelSerializer):
     author = CustomUserAdminInfoSerializer()
     forum = serializers.StringRelatedField()

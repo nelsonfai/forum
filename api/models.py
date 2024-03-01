@@ -33,6 +33,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
+
 
 class Forum(models.Model):
     admin = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
